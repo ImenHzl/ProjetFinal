@@ -43,7 +43,7 @@ source env/bin/activate
 
 ##### 4- Installez les dépendances :
 
-- pip install -r requirement.txt
+- pip install -r requirements.txt
 
 
 ## Utilisation
