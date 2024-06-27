@@ -1,8 +1,49 @@
 import pytest
-from app.api.v1.foreCast import sauvegarder_donneesforeCast_json, get_weather_forecast
+import requests
+import requests_mock
+from app.api.v1.foreCast import get_weather_forecast
 from fastapi import HTTPException
 
-def test_get_weather_forecast():
+@pytest.fixture
+def mock_weather_api():
+    with requests_mock.Mocker() as m:
+        mock_response = {
+            "forecast": {
+                "forecastday": [
+                    {
+                        "date": "2023-01-01",
+                        "day": {
+                            "avgtemp_c": 10,
+                            "condition": {
+                                "text": "Sunny"
+                            }
+                        }
+                    },
+                    {
+                        "date": "2023-01-02",
+                        "day": {
+                            "avgtemp_c": 12,
+                            "condition": {
+                                "text": "Cloudy"
+                            }
+                        }
+                    },
+                    {
+                        "date": "2023-01-03",
+                        "day": {
+                            "avgtemp_c": 14,
+                            "condition": {
+                                "text": "Rain"
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+        m.get('http://api.weatherapi.com/v1/forecast.json', json=mock_response)
+        yield m
+
+def test_get_weather_forecast(mock_weather_api):
     city = "Paris"
     days = 3
 
