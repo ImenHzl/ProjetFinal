@@ -30,7 +30,7 @@ def test_arroseplante_jour_de_pluie():
 
     # Vérification des données du jour
     assert data[0]["date"] == "2024-06-15"
-    assert data[0]["meteo du jour"] == "il pleut"
+    assert data[0]["meteo_du_jour"] == "il pleut"
 
 def test_arroseplante_jour_sans_pluie():
     """
@@ -56,4 +56,4 @@ def test_arroseplante_jour_sans_pluie():
 
     # Vérification des données du jour
     assert data[0]["date"] == "2024-06-25"
-    assert data[0]["meteo du jour"] == "il pleut pas il faut arroser les plantes"
+    assert data[0]["meteo_du_jour"] == "il pleut pas il faut arroser les plantes"
